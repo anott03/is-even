@@ -1,0 +1,24 @@
+[package]
+name = "is-even"
+version = "0.1.0"
+edition = "2021"
+
+# https://github.com/rustwasm/wasm-pack/issues/1247
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+worker = "0.0.15"
+leptos = { version = "0.4.8", features = ["ssr", "nightly"] }
+leptos_meta = { version = "0.4", features = ["nightly"] }
+cfg-if = "1"
+console_log = "1.0"
+futures = "0.3"
+
+[profile.release]
+lto = true
+strip = true
+codegen-units = 1
