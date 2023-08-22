@@ -50,6 +50,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a4668cab20f66d8d020e1fbc0ebe47217433c1b6c8f2040faf858554e394ace6"
 
 [[package]]
+name = "app"
+version = "0.1.0"
+dependencies = [
+ "console_log",
+ "leptos",
+ "leptos_meta",
+ "web-sys",
+]
+
+[[package]]
 name = "async-recursion"
 version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -277,6 +287,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "client"
+version = "0.1.0"
+dependencies = [
+ "app",
+ "console_error_panic_hook",
+ "console_log",
+ "leptos",
+ "log",
+ "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
 name = "collection_literals"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -299,6 +322,16 @@ dependencies = [
  "serde_json",
  "toml",
  "yaml-rust",
+]
+
+[[package]]
+name = "console_error_panic_hook"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a06aeb73f470f66dcdbf7223caeebb85984942f22f1adb2a088cf9668146bbbc"
+dependencies = [
+ "cfg-if",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -769,7 +802,9 @@ checksum = "28b29a3cd74f0f4598934efe3aeba42bae0eb4680554128851ebbecb02af14e6"
 name = "is-even"
 version = "0.1.0"
 dependencies = [
+ "app",
  "cfg-if",
+ "console_error_panic_hook",
  "console_log",
  "futures",
  "leptos",
@@ -944,6 +979,7 @@ dependencies = [
  "cfg-if",
  "futures",
  "indexmap 2.0.0",
+ "js-sys",
  "rkyv",
  "rustc-hash",
  "self_cell",
@@ -954,6 +990,9 @@ dependencies = [
  "thiserror",
  "tokio",
  "tracing",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
 ]
 
 [[package]]

@@ -3,6 +3,8 @@ use leptos::*;
 use leptos::ssr::render_to_stream;
 use futures::StreamExt;
 
+use app::*;
+
 fn log_request(req: &Request) {
     console_log!(
         "{} - [{}], located at: {:?}, within: {}",
@@ -13,16 +15,6 @@ fn log_request(req: &Request) {
     );
 }
 
-#[component]
-fn App(cx: Scope) -> impl IntoView {
-    view!{cx,
-        <div class="w-screen h-screen bg-black flex flex-col justify-center items-center text-white">
-            <h1 class="text-xl font-black">"is-even"</h1>
-            <input name="num-input" type="number" placeholder="Enter a number" class="p-3 bg-inherit text-2xl text-center focus:outline-none" hx-get="/hx/check-even" hx-target="#result" hx-swap="outerHTML" hx-trigger="change"/>
-            <div id="result"></div>
-        </div>
-    }
-}
 
 fn check_even(req: Request) -> Result<Response> {
     let url = req.url()?.to_string();

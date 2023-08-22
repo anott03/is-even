@@ -1,0 +1,22 @@
+[package]
+name = "client"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+app = { workspace = true, features = ["hydrate"] }
+leptos = { workspace = true, features = ["hydrate"] }
+console_log = { workspace = true }
+
+console_error_panic_hook = "0.1"
+log = "0.4"
+wasm-bindgen = "0.2.84"
+web-sys = "0.3.61"
+
+# hydrate is defaulted into leptos already but this allows the
+# feature to be set for this lib directly if desired
+[features]
+hydrate = []
