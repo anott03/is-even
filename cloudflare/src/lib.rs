@@ -56,13 +56,16 @@ fn check_even(req: Request) -> Result<Response> {
 }
 
 fn index() -> Result<Response> {
+    let pkg_path = "/client";
     let head = format!(
         r#"<!DOCTYPE html>
         <html lang="en">
             <head>
                 <script src="https://cdn.tailwindcss.com"></script>
                 <script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
-
+                <link rel="modulepreload" href="{pkg_path}.js">
+                <link rel="preload" href="{pkg_path}_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+                <script type="module">import init, {{ hydrate }} from '{pkg_path}.js'; init('{pkg_path}_bg.wasm').then(hydrate);</script>
                 <style>
                     /* Chrome, Safari, Edge, Opera */
                     input::-webkit-outer-spin-button,
@@ -100,6 +103,12 @@ async fn main(req: Request, env: Env, _ctx: Context) -> Result<Response> {
     return router
         .get("/hx/check-even", |req, _| {
             return check_even(req);
+        })
+        .get("/client.js", |_, _| {
+            // TODO: store static assets in KV and then get them
+            let mut res = Response::from_bytes("".into())?;
+            res.headers_mut().set("Content-Type", "text/javascript")?;
+            return Ok(res);
         })
         .get("/", |_req, _ctx| {
             return index();
